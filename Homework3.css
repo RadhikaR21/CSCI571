@@ -1,0 +1,421 @@
+.tempno
+{
+    padding-bottom: 35px;
+    padding-left: 100px;
+}
+.temp13
+{
+    padding-right: 90px;
+}
+div.relative{
+        position:relative;
+        width:1390px;
+        height:1454px;
+            } 
+    div.absoluteMain{
+        position:absolute;
+        width:1390px;
+        height:1454px;
+    }
+    div.number{
+        position:absolute;
+        width:auto;
+        right:500px;
+        height:auto;        
+        top:45px;
+    }       
+    div.sayHello{
+        position:absolute;
+        width:1000px;
+        height:auto;
+        top:395px;
+        left:10px;
+    } 
+
+div.text1{
+    position:absolute;
+    right:330px;
+    left:auto;
+    top:540px;
+}
+div.text2{
+    position:absolute;
+    right:430px;
+    left:auto;
+    top:570px;
+}
+    div.GetInTouch{
+        position:absolute;
+        width:278px;
+        height:70px;
+        top:650px;
+        left:530px;   
+    }         
+    div.absoluteReadOurArticles{
+        position:absolute;
+        width:1390px;
+        height:201px;
+        top:854px;
+    }
+div.horizontalLine{
+     position:absolute;
+        width:1430px;
+        height:201px;
+        top:1078px;
+   }
+    div.absoluteHeadQuarters{
+        position:absolute;
+        width:1390px;
+        height:320px;
+        top:1086px;         
+    }      
+        
+       
+a.one:link {
+    color: black;
+    background-color: transparent;
+    text-decoration: none;
+}
+a.one:visited {
+    color: black;
+    background-color: transparent;
+    text-decoration: none;
+}
+a.one:hover {
+    color: white;
+    background-color: black;
+    text-decoration: none;
+}
+a.one:active {
+    color: black;
+    background-color: transparent;
+    text-decoration: none;
+}
+    a.two:link {
+    color: white;
+    background-color: transparent;
+    text-decoration: none;
+}
+a.two:visited {
+    color: white;
+    background-color: transparent;
+    text-decoration: none;
+}
+a.two:hover {
+    color: black;
+    background-color: transparent;
+    text-decoration: none;
+}
+a.two:active {
+    color: white;
+    background-color: transparent;
+    text-decoration: none;
+}
+    a.three:link {
+    color: white;
+    background-color: transparent;
+    text-decoration: none;
+}
+a.three:visited {
+    color: white;
+    background-color: transparent;
+    text-decoration: none;
+}
+a.three:hover {
+    color: white;
+    background-color: transparent;
+    text-decoration: underline;
+}
+a.three:active {
+    color: white;
+    background-color: transparent;
+    text-decoration: underline;
+}
+a.three:focus {
+    color: white;
+    background-color: transparent;
+    text-decoration: underline;
+}
+     a.four:link {
+    color: white;
+    background-color: transparent;
+    text-decoration: underline;
+}
+a.four:visited {
+    color: white;
+    background-color: transparent;
+    text-decoration: underline;
+}
+a.four:hover {
+    color: white;
+    background-color: transparent;
+    text-decoration: none;
+}
+a.four:active {
+    color: white;
+    background-color: transparent;
+    text-decoration: underline;
+}
+    a.five:link {
+    color: #CBA60D;
+    background-color: transparent;
+    text-decoration: none;
+}
+a.five:visited {
+    color: #CBA60D;
+    background-color: transparent;
+    text-decoration: none;
+}
+a.five:hover {
+    color: #CBA60D;
+    background-color: transparent;
+    text-decoration: none;
+}
+a.five:active {
+    color: #CBA60D;
+    background-color: transparent;
+    text-decoration: none;
+}
+  a.six:link {
+    color: white;
+    background-color: transparent;
+    text-decoration: none;
+}
+a.six:visited {
+    color: white;
+    background-color: transparent;
+    text-decoration: none;
+}
+a.six:hover {
+    color: white;
+    background-color: transparent;
+    text-decoration: none;
+}
+a.six:active {
+    color: white;
+    background-color: transparent;
+    text-decoration: none;
+}   
+a.seven:link {
+    color: white;
+    background-color: transparent;
+    text-decoration: none;
+}
+a.seven:visited {
+    color: white;
+    background-color: transparent;
+    text-decoration: none;
+}
+a.seven:hover {
+    color: white;
+    background-color: transparent;
+    text-decoration: underline;
+}
+a.seven:active {
+    color: white;
+    background-color: transparent;
+    text-decoration: none;
+}
+a.seven:focus {
+    color: white;
+    background-color: transparent;
+    text-decoration: underline;
+    outline-style:dotted;
+    outline-width:thin;
+}
+ 
+  
+input, p{               
+                border: 1px solid #000;
+                padding: 0;
+                margin: 0;
+                height: 100px;
+                width:500px;
+               
+        }
+input {
+                text-indent: 10px;
+        }
+ td.borderRight
+{
+border-right: 0.01px solid gray;
+}
+   td.borderBottom {
+    border-bottom: 1px solid white;
+    }   
+   
+    tr.borderBottom {
+    display: block;
+    border-bottom: 1px solid white;
+}
+    
+    .GetInTouchButton {
+    background-color: white; 
+    border:2px solid black;
+    color: black;
+    padding: 15px 20px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 16px;    
+    height:70px;
+        border:4px solid black;
+        width:290px;        
+    
+}
+    .GetInTouchButton1:hover {
+    background-color: black;
+    color: white;
+    border:4px solid black;
+}
+    
+    .SignUpButton {
+    background-color: black; 
+    border:4px solid white;
+    color: white;
+    padding: 15px 20px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 8px;    
+      width:240px;
+        height:60px;
+        top:940px;
+        
+}
+    .SignUpButton1:hover {
+    background-color: white;
+    color: black;
+    border:4px solid white;
+}
+    
+    .ContactUsButton {
+    background-color: black; 
+    border:4px solid white;
+    color: white;
+    padding: 15px 20px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 10px;    
+    width:170px;
+    height;25px;
+} 
+    
+    .ContactUsButton1:hover {
+    background-color: white;
+    color: black;
+    border:2px solid white;
+}
+.ContactUsButton1:focus {
+    background-color: white;
+    color: black;
+    border:2px solid white;
+}
+    
+    code{
+        font-stretch: ultra-expanded;
+        font-family: "Helvetica", sans-serif;
+        font-size: 80%;
+    }
+    font.no{
+        font-stretch:condensed;
+        font-family: "MS UI Gothic";
+        font-size:350%;
+        padding-bottom:40px;
+}
+.underline_text {
+    border: 0px;
+      border-bottom: solid 6px white;
+      display: inline;
+      padding-bottom: 0.5px;
+    margin-bottom: 0px;
+}
+    font.one{
+        font-stretch:condensed;
+        font-family: "helvetica","MS UI Gothic";
+            font-size:550%;
+    }
+    font.three{
+        font-stretch:condensed;
+        font-family: "helvetica",sans-serif;
+        font-size:550%;
+    }
+    font.spacing1{
+        letter-spacing: 8px;
+    }
+    font.spacing3{
+        letter-spacing: 7px;
+    }
+       font.spacing2{
+        letter-spacing: 4px;
+    }
+    font.spacing5{
+        letter-spacing: 7px;
+        font-size:80%;        
+    }
+    font.spacingLocationFavourites{
+        letter-spacing: 4px;
+    }
+     font.spacing4{
+        letter-spacing: 1px;
+         line-height:20px;
+    }
+    .emailaddress{
+        font-size: 26;
+    text-align: center;
+    }
+    td.background {
+        background: url("http://cs-server.usc.edu:45678/hw/hw3/images/sayhello.png") no-repeat;
+        border-color:none;
+        left:400px;
+        }
+     td.emailaddress:focus {
+        background: url("http://cs-server.usc.edu:45678/hw/hw3/images/sayhello.png") no-repeat;
+        border-color:8px solid black;
+        }
+font.finalstyle{
+    font-family: "Helvetica","Arial";
+}
+
+
+font.white{
+    color:white;
+}
+font.black{
+    color:black;
+}
+font.yellow{
+    color:"#CBA60D";
+}
+table.bottomBorder {
+    border-style: solid;
+    border-bottom: 0.5px white;
+}
+
+div.HelloSection{
+    top:100px;
+}  
+div.TouchSection{
+    top:250px;
+}
+div.SignUpSection{
+    top:400px;
+}
+div.ArticleSection{
+    top:550px;
+}
+div.ContactUsSection{
+    top:700px;
+}
+div.No13Section{
+    top:850px;
+}
+p{
+border-color:white;
+}
+
+ input[placeholder]:hover,input[placeholder]:focus {
+     border-width:6px;
+     border-color: black; 
+}
