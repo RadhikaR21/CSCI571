@@ -1,0 +1,217 @@
+.btn {
+  display: inline-block;
+  padding: 6px 12px;
+  margin-bottom: 0;
+  font-size:14px;
+  font-weight: normal;
+  line-height: 1.42857143;
+  text-align: center;
+  white-space: nowrap;
+  vertical-align: middle;
+  cursor: pointer;
+  background-image: none;
+  border: 1px solid transparent;
+  border-radius: 4px;
+  padding: 10px 16px;
+}
+ .btn-primary1 {
+  color:  #3276b1;
+  background-color: white;
+  }
+ .btn-primary2{
+  color:#3276b1;
+  background-color:white;
+     border-color: white;
+            }        
+.btn-primary1:hover,
+.btn-primary1:focus,
+.btn-primary1:active,
+.btn-primary1.active,
+.open .dropdown-toggle.btn-primary {
+  color: white;
+  background-color: #3276b1;
+  border-color:  #3276b1
+} 
+
+.links:active,.links:hover,
+.links:focus{
+color: white !important;
+  background-color: #3276b1 !important;
+  border-color:  #3276b1 !important;
+   
+    
+}
+
+/*
+
+.active a {
+ color: white !important;
+  background-color: #3276b1 !important;
+  border-color:  #3276b1 !important;
+   
+}
+*/
+
+img.img-responsive { display: table-cell; max-width: 100%; }
+
+.open .dropdown-toggle.btn-primary {
+  color: white;
+  background-color: #3276b1;
+  border-color:  #3276b1
+}       
+input[type="reset"]{
+            background: transparent;
+            border: none;
+            font-family: 'FontAwesome';
+            font-size: 1.3px;
+            color: red;
+            opacity: 0.4;
+           
+            pointer-events: auto;
+        }
+
+        .form-control:focus+input[type="reset"]{
+            opacity: 0.7;
+        }
+
+
+div.panel
+{
+  padding-left: 10px;
+    padding-right: 10px;
+    
+}
+.pbar.animate-hide {
+ -webkit-transition:all cubic-bezier(0.250, 0.460, 0.450, 0.940) 1000s;
+    -moz-transition:all cubic-bezier(0.250, 0.460, 0.450, 0.940) 1000s;
+    -o-transition:all cubic-bezier(0.250, 0.460, 0.450, 0.940) 1000s;
+    transition:all cubic-bezier(0.250, 0.460, 0.450, 0.940) 1000s;
+  line-height:20px;
+  opacity:1;
+  padding:10px;
+  border:1px solid black;
+  background:white;
+  position: absolute;
+  left: 0;
+}
+
+.pbar.animate-hide.ng-hide {
+  left: -100%;
+  opacity:0;
+  padding:0 10px;
+}
+
+
+
+ .slideacross.ng-hide-add, .slideacross.ng-hide-remove {
+                
+                display: block !important; 
+            }
+            
+            .slideacross.ng-hide-add { 
+                -webkit-animation:0.5s lightSpeedOut ease; 
+                animation:1s lightSpeedOut ease; 
+            }
+           
+            .slideacross.ng-hide-remove { 
+                -webkit-animation:0.5s lightSpeedOut ease; 
+                animation:1s lightSpeedOut ease; 
+            }
+           
+
+  @-webkit-keyframes flipInX {
+                0% {
+                    -webkit-transform: perspective(400px) rotate3d(1, 0, 0, 90deg);
+                    transform: perspective(400px) rotate3d(1, 0, 0, 90deg);
+                    -webkit-transition-timing-function: ease-in;
+                    transition-timing-function: ease-in;
+                    opacity: 0;
+                }
+                40% {
+                    -webkit-transform: perspective(400px) rotate3d(1, 0, 0, -20deg);
+                    transform: perspective(400px) rotate3d(1, 0, 0, -20deg);
+                    -webkit-transition-timing-function: ease-in;
+                    transition-timing-function: ease-in;
+                }
+                60% {
+                    -webkit-transform: perspective(400px) rotate3d(1, 0, 0, 10deg);
+                    transform: perspective(400px) rotate3d(1, 0, 0, 10deg);
+                    opacity: 1;
+                }
+                80% {
+                    -webkit-transform: perspective(400px) rotate3d(1, 0, 0, -5deg);
+                    transform: perspective(400px) rotate3d(1, 0, 0, -5deg);
+                }
+                100% {
+                    -webkit-transform: perspective(400px);
+                    transform: perspective(400px);
+                }
+            }
+
+
+ @keyframes flipInX {
+                0% {
+                    -webkit-transform: perspective(400px) rotate3d(1, 0, 0, 90deg);
+                    -ms-transform: perspective(400px) rotate3d(1, 0, 0, 90deg);
+                    transform: perspective(400px) rotate3d(1, 0, 0, 90deg);
+                    -webkit-transition-timing-function: ease-in;
+                    transition-timing-function: ease-in;
+                    opacity: 0;
+                }
+                40% {
+                    -webkit-transform: perspective(400px) rotate3d(1, 0, 0, -20deg);
+                    -ms-transform: perspective(400px) rotate3d(1, 0, 0, -20deg);
+                    transform: perspective(400px) rotate3d(1, 0, 0, -20deg);
+                    -webkit-transition-timing-function: ease-in;
+                    transition-timing-function: ease-in;
+                }
+               60% {
+                   -webkit-transform: perspective(400px) rotate3d(1, 0, 0, 10deg);
+                   -ms-transform: perspective(400px) rotate3d(1, 0, 0, 10deg);
+                   transform: perspective(400px) rotate3d(1, 0, 0, 10deg);
+                   opacity: 1;
+                }
+                80% {
+                    -webkit-transform: perspective(400px) rotate3d(1, 0, 0, -5deg);
+                    -ms-transform: perspective(400px) rotate3d(1, 0, 0, -5deg);
+                    transform: perspective(400px) rotate3d(1, 0, 0, -5deg);
+                }
+                100% {
+                    -webkit-transform: perspective(400px);
+                    -ms-transform: perspective(400px);
+                    transform: perspective(400px);
+                }
+            }
+
+
+ @-webkit-keyframes lightSpeedOut {
+                0% {
+                    opacity: 1;
+                }
+                100% {
+                    -webkit-transform: translate3d(100%, 0, 0) skewX(30deg);
+                    transform: translate3d(100%, 0, 0) skewX(30deg);
+                    opacity: 0;
+                }
+            }
+
+            @keyframes lightSpeedOut {
+                0% {
+                    opacity: 1;
+                }
+                100% {
+                    -webkit-transform: translate3d(100%, 0, 0) skewX(30deg);
+                    -ms-transform: translate3d(100%, 0, 0) skewX(30deg);
+                    transform: translate3d(100%, 0, 0) skewX(30deg);
+                    opacity: 0;
+                }
+            }
+
+
+            
+
+/*image enlarge*/
+img.img-responsive { 
+    display: table-cell; 
+    max-width: 100%; 
+}

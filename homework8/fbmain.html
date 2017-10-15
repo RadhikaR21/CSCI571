@@ -1,0 +1,831 @@
+<html ng-app="fbapp">
+<head>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link data-require="bootstrap-css@3.1.1" data-semver="3.1.1" rel="stylesheet" href="https://netdna.bootstrapcdn.com/bootstrap/3.1.1/css/bootstrap.min.css" />
+    <script src="fbjs.js"></script> 
+    
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+    <link href="https://netdna.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" rel="stylesheet">  
+   
+  <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.5.6/angular.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.5.6/angular-animate.js"></script> 
+    
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.0/jquery.min.js"></script>       
+    
+    <link rel="stylesheet" href="fbstyle.css" />
+    
+        
+    </head>
+    <body>
+     <div ng-controller="fbctrl" >
+     
+      <div class="container">
+        <div class="row">
+             <div class="col-md-12" >
+                 <form data-toggle="validator" role="form"><div class="form-group">
+    <div class="col-md-4" style="background-color:#e6e6ff;color: #3276b1;height:50px;font-size:20px;text-align:left">FB Search</div>
+    <div class="col-md-4" style="background-color:#e6e6ff;height:50px">
+            <div class="input-group">       
+           
+      <input type="search" class="form-control" size="50" placeholder="type something..." id="q" ng-model="input" data-error="Please type something" required>
+      <div class="input-group-btn">
+        <button class="btn btn-primary" name="submit" type="submit" ng-click="fbcall();userslist()" >
+        <i class="glyphicon glyphicon-search"></i>
+      </button>
+      </div>
+    </div>
+        </div>
+        <div class="col-md-4" style="background-color:#e6e6ff;height:50px"> <button type="reset" id="clearBtn" class="btn btn-primary" ng-click="clear()">Clear </button> </div></div></form>
+          </div></div>       
+              
+  <div class="row" id="heading">
+      
+       <ul class="nav nav-tabs nav-justified">     
+        <li>     <a  class="links" data-toggle="tab" role="tab" href="#user" ng-click="userslist()" >Users</a></li>
+        <li>    <a class="links" data-toggle="tab" role="tab" href="#page" ng-click="pagelist()">Pages</a></li>
+         <li>   <a class="links" data-toggle="tab" role="tab" href="#event"  ng-click="eventlist()">Events</a></li>
+         <li>   <a class="links" data-toggle="tab" role="tab" href="#place"  ng-click="placelist()">Places</a></li>
+          <li>  <a class="links"  data-toggle="tab" role="tab" href="#group"  ng-click="grouplist()">Groups</a></li>
+          <li>  <a class="links" data-toggle="tab" role="tab" href="#favorite"  ng-click="displayfav()">Favorites</a></li>
+       </ul> 
+         
+  </div> 
+     <div class="row">      
+ <div class="tab-content" >
+   
+ 
+      <div id="progbar" class="text-center" ng-show="showbar" >
+          <br><br><br><br><br>
+                <div class="progress center-block" style="width:950px;">
+                    <div class="progress-bar progress-bar-striped active" role="progressbar" aria-valuenow="50" aria-valuemin="0" aria-valuemax="100" style="width: 50%">
+                        <span class="sr-only">50% Complete</span>
+                    </div>
+                </div>
+            </div>
+     <div id="user" class="tab-pane fade in active"  >
+    <div id="usershow"  class="slideacross" ng-show="pageuser" >
+          
+      
+        <table class = "table table-hover">
+    <thead><tr><th>#</th><th>Profile Photo</th><th>Name</th><th>Favorite</th><th>Details</th></tr></thead>
+       <tr ng-repeat="x in user" >
+           <td>{{$index+1}}</td>
+           <td><img src="{{x.picture.data.url}}" class="img-circle" height="50px" width="50px"></td>
+          <td>{{x.name}}</td>
+    <td><button id="star" type="button" class="btn btn-default btn-sm" ng-click="makeasfav(x.id,x.picture.data.url,x.name,'users');changeColor(x.id)" >
+        <span id = {{x.id}} class="glyphicon glyphicon-star-empty"></span>
+        </button></td>
+                     
+           <td><a href="#userdetails"><button type="button" class="btn btn-default btn-sm" ng-click="displayuserDetails(x.id); userdetailspage(x.id)">
+          <span class="glyphicon glyphicon-menu-right"></span> 
+        </button></a></td></tr> 
+            
+         </table>               
+
+        </div>
+
+    
+     <div id="details" ng-show="detuser" class="slideacross">
+         <div class="col-md-12 page">                        
+<div class="row">
+    <div class="col-md-12 row">
+ <div class="col-md-8">
+    <button type="button" class="btn btn-default btn-md" ng-click="displayuserFirstPage()">
+         <span class="glyphicon glyphicon-chevron-left"> </span>  Back 
+        </button>    
+    </div>      
+     <div class="col-md-2">
+        
+        </div>
+        <div class="col-md-2">
+         <span class = "glyphicon glyphicon-star-empty" height="25px" width="25px" role="button" id="star" ng-click="makeasfav(usrdetailspage.data.id,usrdetailspage.data.picture.data.url,usrdetailspage.data.name,'users')"></span>
+            <button class="btn btn-default pull-right" id="idvalue"  ng-click="share(usrdetailspage.data.id)" align="right"><img src='http://cs-server.usc.edu:45678/hw/hw8/images/facebook.png' height="25px" width="25px"></button>
+        </div>
+   </div>
+      </div>       
+ 
+<div class="col-md-6" > 
+<div class="panel-group">
+<div class="panel panel-default" >
+    
+    
+<div class="panel-heading">
+Albums
+</div>    
+  <br>
+    <div id="progbar" class="text-center" ng-show="albshowbar" >
+          <br><br><br><br><br>
+                <div class="progress center-block" style="width:300px;">
+                    <div class="progress-bar progress-bar-striped active" role="progressbar" aria-valuenow="50" aria-valuemin="0" aria-valuemax="100" style="width: 50%">
+                        <span class="sr-only">50% Complete</span>
+                    </div>
+                </div>
+            </div>
+    <div ng-show="albumcontent">
+     <div ng-if="!usrdetailspage.data.albums" class="alert alert-danger">
+  No data found
+</div>    
+     
+   <div ng-if="usrdetailspage.data.albums">
+<div class="panel-body" >    
+    
+     
+    <div data-ng-repeat="k in [0,1,2,3,4]">
+      <div class="well" ng-show="exists({{usrdetailspage.data.albums.data[k].name}})">
+        <a href="#{{usrdetailspage.data.id+k}}" data-toggle="collapse" ng-click="photodetails()">  
+         {{usrdetailspage.data.albums.data[k].name}}</a></div>
+    <div id="{{usrdetailspage.data.id+k}}" class="collapse panel-collapse">
+<div class="panel panel-default" data-ng-repeat="j in [0,1]" ng-show="exists({{usrdetailspage.data.albums.data[k].photos.data[j].images[5].source}})">
+     
+<img class="img-responsive"  src="{{usrdetailspage.data.albums.data[k].photos.data[j].images[5].source}}" class="media-object" style="height:300px;width:600px">
+
+    </div>
+        </div>    
+    </div>
+    </div>
+   </div>     
+</div>
+</div>
+</div>
+             </div>
+    
+    <div class="col-md-6" > 
+<div class="panel-group">
+<div class="panel panel-default" >
+ 
+<div class="panel-heading">
+Posts
+</div>
+   <br>
+    <div id="progbar" class="text-center" ng-show="postshowbar" >
+          <br><br><br><br><br>
+                <div class="progress center-block" style="width:300px;">
+                    <div class="progress-bar progress-bar-striped active" role="progressbar" aria-valuenow="50" aria-valuemin="0" aria-valuemax="100" style="width: 50%">
+                        <span class="sr-only">50% Complete</span>
+                    </div>
+                </div>
+            </div>
+     <div ng-show="postcontent">
+    <div  ng-if="!usrdetailspage.data.posts" class="alert alert-danger">
+  No data found
+</div>
+   
+ 
+    <div ng-if="usrdetailspage.data.posts">
+        
+    
+         <div class="panel panel-default" data-ng-repeat="i in [0,1,2,3,4]" ng-show="exists({{usrdetailspage.data.posts.data[i].message}})">
+   
+<div class="media">
+    <div class="media-left">
+    <img src="{{usrdetailspage.data.picture.data.url}}" class="media-object" style="width:60px">
+    </div>
+<div class="media-body">
+      <h4 class="media-heading">{{usrdetailspage.data.name}}</h4>
+<p>{{dateformat(usrdetailspage.data.posts.data[i].created_time)}}</p>
+    </div>
+  </div>
+        <br>
+<div>
+{{usrdetailspage.data.posts.data[i].message}}
+</div> 
+             </div></div> </div>  
+
+    </div>
+    </div>                           
+
+    </div>
+</div>   
+</div>          
+         
+     </div>
+                
+     <!--page--> 
+     <div id="page" class="tab-pane fade">
+    <div id="pageshow"  ng-show="pagepage" class="slideacross">
+                    
+        <table class = "table table-hover">
+    <thead><tr><th>#</th><th>Profile Photo</th><th>Name</th><th>Favorite</th><th>Details</th></tr></thead>
+       <tr ng-repeat="x in page">
+           <td>{{$index+1}}</td>
+           <td><img src="{{x.picture.data.url}}" class="img-circle" height="50px" width="50px"></td>
+          <td>{{x.name}}</td>
+    <td><button id="star" type="button" class="btn btn-default btn-sm" ng-click="makeasfav(x.id,x.picture.data.url,x.name,'pages');changeColor(x.id)">
+          <span id = {{x.id}} class="glyphicon glyphicon-star-empty"></span>
+        </button></td>
+           <td>                
+                                   
+                     <a href="#pagedetails">
+                         <button  type="button" class="btn btn-default btn-sm" ng-click="displaypageDetails(x.id);pagedetailspage(x.id)">
+          <span class="glyphicon glyphicon-menu-right"></span> 
+               </button></a>
+                     
+                     </td></tr>                  
+         </table></div> 
+          
+        
+     <div id="details" ng-show="detpage" class="slideacross">
+        <div class="col-md-12 page">                        
+
+    <div class="col-md-12 row">
+ <div class="col-md-8">
+    <button type="button" class="btn btn-default btn-md" ng-click="displaypageFirstPage()">
+         <span class="glyphicon glyphicon-chevron-left"> </span>  Back 
+        </button>    
+    </div>      
+     <div class="col-md-3">
+        
+        </div>
+        <div class="col-md-1">
+         <span class = "glyphicon glyphicon-star-empty" role="button" id="star" ng-click="makeasfav(pgedetailspage.data.id,pgedetailspage.data.picture.data.url,pgedetailspage.data.name,'pages')"></span>
+            <button class="btn btn-default pull-right" id="idvalue"  ng-click="share(pgedetailspage.data.id)" align="right"><img src='http://cs-server.usc.edu:45678/hw/hw8/images/facebook.png' height="25px" width="25px"></button>
+        </div>
+   </div>
+<div class="col-md-6"> 
+<div class="panel-group">
+<div class="panel panel-default" >
+
+<div class="panel-heading">
+Albums
+</div><br>
+    <div id="progbar" class="text-center" ng-show="albshowbar" >
+          <br><br><br><br><br>
+                <div class="progress center-block" style="width:300px;">
+                    <div class="progress-bar progress-bar-striped active" role="progressbar" aria-valuenow="50" aria-valuemin="0" aria-valuemax="100" style="width: 50%">
+                        <span class="sr-only">50% Complete</span>
+                    </div>
+                </div>
+            </div>
+    <div ng-show="albumcontent">
+     <div  ng-if="!pgedetailspage.data.albums" class="alert alert-danger">
+  No data found
+</div>    
+    <br> 
+   <div ng-if="pgedetailspage.data.albums">
+<div class="panel-body" data-ng-repeat="k in [0,1,2,3,4]" ng-show="exists({{pgedetailspage.data.albums.data[k].name}})">    
+      <div class="well" ng-show="exists({{pgedetailspage.data.albums.data[k].name}})">
+        <a href="#{{pgedetailspage.data.id+k}}" data-toggle="collapse" ng-click="photodetails()">  
+         {{pgedetailspage.data.albums.data[k].name}}</a></div>
+    <div id="{{pgedetailspage.data.id+k}}" class="collapse panel-collapse">
+<div class="panel panel-default" data-ng-repeat="j in [0,1]" ng-show="exists({{pgedetailspage.data.albums.data[k].photos.data[j].images[5].source}})">
+    
+<img class="img-responsive" src="{{pgedetailspage.data.albums.data[k].photos.data[j].images[5].source}}" class="media-object" style="height:300px;width:600px">
+
+    </div>
+    </div>
+        </div>    
+    </div>
+    </div>
+   </div>     
+</div>
+</div>
+     
+
+    
+    <div class="col-md-6"> 
+<div class="panel-group">
+<div class="panel panel-default" >
+ 
+<div class="panel-heading">
+Posts
+</div>
+      <br>
+    <div  ng-if="!pgedetailspage.data.posts" class="alert alert-danger">
+  No data found
+</div>
+    <div id="progbar" class="text-center" ng-show="postshowbar" >
+          <br><br><br><br><br>
+                <div class="progress center-block" style="width:300px;">
+                    <div class="progress-bar progress-bar-striped active" role="progressbar" aria-valuenow="50" aria-valuemin="0" aria-valuemax="100" style="width: 50%">
+                        <span class="sr-only">50% Complete</span>
+                    </div>
+                </div>
+            </div>
+     <div ng-show="postcontent">
+    <div ng-if="pgedetailspage.data.posts">
+         <div class="panel panel-default" data-ng-repeat="i in [0,1,2,3,4]" ng-show="exists({{pgedetailspage.data.posts.data[i].message}})">
+    <div class="panel-body" >
+<div class="media">
+    <div class="media-left">
+    <img src="{{pgedetailspage.data.picture.data.url}}" class="media-object" style="width:60px">
+    </div>
+<div class="media-body">
+      <h4 class="media-heading">{{pgedetailspage.data.name}}</h4>
+<p>{{dateformat(pgedetailspage.data.posts.data[i].created_time)}}</p>
+    </div>
+  </div>
+        <br>
+<div>
+{{pgedetailspage.data.posts.data[i].message}}
+</div> 
+             </div></div> </div>  
+
+    </div>
+    </div>                           
+
+    </div>
+</div>   
+</div>     
+     </div> 
+     </div>
+     <!--event-->
+     <div id="event" class="tab-pane fade">
+    <div id="eventshow"  ng-show="pageevt" class="slideacross">
+            
+        <table class = "table table-hover">
+    <thead><tr><th>#</th><th>Profile Photo</th><th>Name</th><th>Favorite</th><th>Details</th></tr></thead>
+       <tr ng-repeat="x in event">
+           <td>{{$index+1}}</td>
+           <td><img src="{{x.picture.data.url}}" class="img-circle" height="50px" width="50px"></td>
+          <td>{{x.name}}</td>
+    <td><button id="star" type="button" class="btn btn-default btn-sm" ng-click="makeasfav(x.id,x.picture.data.url,x.name,'events');changeColor(x.id)">
+          <span id = {{x.id}} class="glyphicon glyphicon-star-empty"></span>
+        </button></td>
+           <td><a href="#eventdetails"><button type="button" class="btn btn-default btn-sm" ng-click="displayeventDetails(x.id); eventdetailspage(x.id)">
+          <span class="glyphicon glyphicon-menu-right"></span> 
+        </button></a></td></tr>                         
+         </table>
+        </div>
+        
+             <div id="details" ng-show="detevent" class="slideacross">
+        <div class="col-md-12 page">                        
+
+    <div class="col-md-12 row">
+ <div class="col-md-8">
+    <button type="button" class="btn btn-default btn-md" ng-click="displayeventFirstPage()">
+         <span class="glyphicon glyphicon-chevron-left"> </span>  Back 
+        </button>    
+    </div>      
+     <div class="col-md-3">
+        
+        </div>
+        <div class="col-md-1">
+         <span class = "glyphicon glyphicon-star-empty" role="button" id="star" ng-click="makeasfav(evtdetailspage.data.id,evtdetailspage.data.picture.data.url,evtdetailspage.data.name,'events')"></span>
+            <button class="btn btn-default pull-right" id="idvalue"  ng-click="share(evtdetailspage.data.id)" align="right"><img src='http://cs-server.usc.edu:45678/hw/hw8/images/facebook.png' height="25px" width="25px"></button>
+        </div>
+   </div>
+<div class="col-md-6"> 
+<div class="panel-group">
+<div class="panel panel-default" >
+
+<div class="panel-heading">
+Albums
+</div><br>
+    <div id="progbar" class="text-center" ng-show="albshowbar" >
+          <br><br><br><br><br>
+                <div class="progress center-block" style="width:300px;">
+                    <div class="progress-bar progress-bar-striped active" role="progressbar" aria-valuenow="50" aria-valuemin="0" aria-valuemax="100" style="width: 50%">
+                        <span class="sr-only">50% Complete</span>
+                    </div>
+                </div>
+            </div>
+    <div ng-show="albumcontent">
+     <div  ng-if="!evtdetailspage.data.albums" class="alert alert-danger">
+  No data found
+</div>    
+    <br> 
+   <div ng-if="evtdetailspage.data.albums">
+<div class="panel-body" data-ng-repeat="k in [0,1,2,3,4]" ng-show="exists({{evtdetailspage.data.albums.data[k].name}})">    
+      <div class="well" ng-show="exists({{evtdetailspage.data.albums.data[k].name}})">
+        <a href="#{{evtdetailspage.data.id+k}}" data-toggle="collapse" ng-click="photodetails()">  
+         {{evtdetailspage.data.albums.data[k].name}}</a></div>
+    <div id="{{evtdetailspage.data.id+k}}" class="collapse panel-collapse">
+<div class="panel panel-default" data-ng-repeat="j in [0,1]" ng-show="exists({{evtdetailspage.data.albums.data[k].photos.data[j].images[5].source}})">
+    
+<img class="img-responsive"  src="{{evtdetailspage.data.albums.data[k].photos.data[j].images[5].source}}" class="media-object" style="height:300px;width:600px">
+
+    </div>
+        </div>    
+    </div>
+    </div>
+   </div>     
+</div>
+</div>
+</div>
+             
+    
+    <div class="col-md-6"> 
+<div class="panel-group">
+<div class="panel panel-default" >
+ 
+<div class="panel-heading">
+Posts
+</div>
+      <br>
+    <div  ng-if="!evtdetailspage.data.posts" class="alert alert-danger">
+  No data found
+</div>
+    <div id="progbar" class="text-center" ng-show="postshowbar" >
+          <br><br><br><br><br>
+                <div class="progress center-block" style="width:300px;">
+                    <div class="progress-bar progress-bar-striped active" role="progressbar" aria-valuenow="50" aria-valuemin="0" aria-valuemax="100" style="width: 50%">
+                        <span class="sr-only">50% Complete</span>
+                    </div>
+                </div>
+            </div>
+     <div ng-show="postcontent">
+    <div ng-if="evtdetailspage.data.posts">
+         <div class="panel panel-default" data-ng-repeat="i in [0,1,2,3,4]" ng-show="exists({{evtdetailspage.data.posts.data[i].message}})">
+    <div class="panel-body" >
+<div class="media">
+    <div class="media-left">
+    <img src="{{evtdetailspage.data.picture.data.url}}" class="media-object" style="width:60px">
+    </div>
+<div class="media-body">
+      <h4 class="media-heading">{{evtdetailspage.data.name}}</h4>
+<p>{{dateformat(evtdetailspage.data.posts.data[i].created_time)}}</p>
+    </div>
+  </div>
+        <br>
+<div>
+{{evtdetailspage.data.posts.data[i].message}}
+</div> 
+             </div></div> </div>  
+</div>
+    </div>
+    </div>                           
+
+    </div>
+</div>   
+</div>  
+     </div>
+       <!--place--> 
+     <div id="place" class="tab-pane fade">
+    <div id="placeshow"  ng-show="pageplc" class="slideacross">
+    
+        <table class = "table table-hover">
+    <thead><tr><th>#</th><th>Profile Photo</th><th>Name</th><th>Favorite</th><th>Details</th></tr></thead>
+       <tr ng-repeat="x in place">
+           <td>{{$index+1}}</td>
+           <td><img src="{{x.picture.data.url}}" class="img-circle" height="50px" width="50px"></td>
+          <td>{{x.name}}</td>
+    <td><button id="star" type="button" class="btn btn-default btn-sm" ng-click="makeasfav(x.id,x.picture.data.url,x.name,'users');changeColor(x.id)" >
+        <span id = {{x.id}} class="glyphicon glyphicon-star-empty"></span>
+        </button></td>
+                     
+           <td><a href="#placedetails"><button type="button" class="btn btn-default btn-sm" ng-click="displayplaceDetails(x.id); placedetailspage(x.id)">
+          <span class="glyphicon glyphicon-menu-right"></span> 
+        </button></a></td></tr>               
+        </table>
+        </div>
+        
+         <div id="details" ng-show="detplc" class="slideacross">
+         <div class="col-md-12 page">                        
+
+    <div class="col-md-12 row">
+ <div class="col-md-8">
+    <button type="button" class="btn btn-default btn-md" ng-click="displayplaceFirstPage()">
+         <span class="glyphicon glyphicon-chevron-left"> </span>  Back 
+        </button>    
+    </div>      
+     <div class="col-md-3">
+        
+        </div>
+        <div class="col-md-1">
+         <span class = "glyphicon glyphicon-star-empty" role="button" id="star" ng-click="makeasfav(plcdetailspage.data.id,plcdetailspage.data.picture.data.url,plcdetailspage.data.name,'places')"></span>
+            <button class="btn btn-default pull-right" id="idvalue"  ng-click="share(plcdetailspage.data.id)" align="right"><img src='http://cs-server.usc.edu:45678/hw/hw8/images/facebook.png' height="25px" width="25px"></button>
+        </div>
+   </div>
+<div class="col-md-6"> 
+<div class="panel-group">
+<div class="panel panel-default" >
+
+<div class="panel-heading">
+Albums
+</div><br>
+   <div id="progbar" class="text-center" ng-show="albshowbar" >
+          <br><br><br><br><br>
+                <div class="progress center-block" style="width:300px;">
+                    <div class="progress-bar progress-bar-striped active" role="progressbar" aria-valuenow="50" aria-valuemin="0" aria-valuemax="100" style="width: 50%">
+                        <span class="sr-only">50% Complete</span>
+                    </div>
+                </div>
+            </div>
+    <div ng-show="albumcontent">
+     <div  ng-if="!plcdetailspage.data.albums" class="alert alert-danger">
+  No data found
+</div>    
+    <br> 
+   <div ng-if="plcdetailspage.data.albums">
+<div class="panel-body" data-ng-repeat="k in [0,1,2,3,4]">    
+      <div class="well" ng-show="exists({{plcdetailspage.data.albums.data[k].name}})">
+        <a href="#{{plcdetailspage.data.id+k}}" data-toggle="collapse" ng-click="photodetails()">  
+         {{plcdetailspage.data.albums.data[k].name}}</a></div>
+    <div id="{{plcdetailspage.data.id+k}}" class="collapse panel-collapse">
+<div class="panel panel-default" data-ng-repeat="j in [0,1]" ng-show="exists({{plcdetailspage.data.albums.data[k].photos.data[j].images[5].source}})">
+     
+<img class="img-responsive" src="{{plcdetailspage.data.albums.data[k].photos.data[j].images[5].source}}" class="media-object" style="height:300px;width:600px">
+
+    </div>
+        </div>    
+    </div>
+   </div>     
+</div>
+</div>
+    </div></div>
+
+    
+    <div class="col-md-6"> 
+<div class="panel-group">
+<div class="panel panel-default" >
+ 
+<div class="panel-heading">
+Posts
+</div><br>
+      <div id="progbar" class="text-center" ng-show="postshowbar" >
+          <br><br><br><br><br>
+                <div class="progress center-block" style="width:300px;">
+                    <div class="progress-bar progress-bar-striped active" role="progressbar" aria-valuenow="50" aria-valuemin="0" aria-valuemax="100" style="width: 50%">
+                        <span class="sr-only">50% Complete</span>
+                    </div>
+                </div>
+            </div>
+     <div ng-show="postcontent">
+    <div  ng-if="!plcdetailspage.data.posts" class="alert alert-danger">
+  No data found
+</div>
+    <br>
+ 
+    <div ng-if="plcdetailspage.data.posts">
+         <div class="panel panel-default" data-ng-repeat="i in [0,1,2,3,4]" ng-show="exists({{plcdetailspage.data.posts.data[i].message}})">
+    <div class="panel-body" >
+<div class="media">
+    <div class="media-left">
+    <img src="{{plcdetailspage.data.picture.data.url}}" class="media-object" style="width:60px">
+    </div>
+<div class="media-body">
+      <h4 class="media-heading">{{plcdetailspage.data.name}}</h4>
+<p>{{dateformat(plcdetailspage.data.posts.data[i].created_time)}}</p>
+    </div>
+  </div>
+        <br>
+<div>
+{{plcdetailspage.data.posts.data[i].message}}
+</div> 
+             </div></div> </div>  
+
+    </div>
+    </div>                           
+
+    </div>
+</div>   
+             </div>   </div>       
+          
+     </div>
+            
+    
+       <!--group--> 
+   <div id="group"  class="tab-pane fade">
+    <div id="groupshow"  ng-show="pagegrp" class="slideacross">
+      
+        <table class = "table table-hover">
+    <thead><tr><th>#</th><th>Profile Photo</th><th>Name</th><th>Favorite</th><th>Details</th></tr></thead>
+       <tr ng-repeat="x in group">
+           <td>{{$index+1}}</td>
+           <td><img src="{{x.picture.data.url}}" class="img-circle" height="50px" width="50px"></td>
+          <td>{{x.name}}</td>
+    <td><button id="star" type="button" class="btn btn-default btn-sm" ng-click="makeasfav(x.id,x.picture.data.url,x.name,'groups');changeColor(x.id)">
+          <span id = {{x.id}}  class="glyphicon glyphicon-star-empty" ></span>
+        </button></td>
+           <td><a href="#groupdetails"><button type="button" class="btn btn-default btn-sm" ng-click="displaygroupDetails(x.id); groupdetailspage(x.id)">
+          <span class="glyphicon glyphicon-menu-right"></span>
+        </button></a></td></tr>                        
+         </table>
+        </div>
+        
+         <div id="details" ng-show="detgrp" class="slideacross">
+         <div class="col-md-12 page">                      
+
+    <div class="col-md-12 row">
+ <div class="col-md-8">
+    <button type="button" class="btn btn-default btn-md" ng-click="displaygroupFirstPage()">
+         <span class="glyphicon glyphicon-chevron-left"> </span>  Back 
+        </button>    
+    </div>      
+     <div class="col-md-3">
+        
+        </div>
+       <div class="col-md-1">
+         <span class = "glyphicon glyphicon-star-empty" role="button" id="star" ng-click="makeasfav(grpdetailspage.data.id,grpdetailspage.data.picture.data.url,grpdetailspage.data.name,'groups')"></span>
+            <button class="btn btn-default pull-right" id="idvalue"  ng-click="share(grpdetailspage.data.id)" align="right"><img src='http://cs-server.usc.edu:45678/hw/hw8/images/facebook.png' height="25px" width="25px"></button>
+        </div>
+             </div>
+<div class="col-md-6"> 
+<div class="panel-group">
+<div class="panel panel-default" >
+
+<div class="panel-heading">
+Albums
+</div><br>
+    <div id="progbar" class="text-center" ng-show="albshowbar" >
+          <br><br><br><br><br>
+                <div class="progress center-block" style="width:300px;">
+                    <div class="progress-bar progress-bar-striped active" role="progressbar" aria-valuenow="50" aria-valuemin="0" aria-valuemax="100" style="width: 50%">
+                        <span class="sr-only">50% Complete</span>
+                    </div>
+                </div>
+            </div>
+    <div ng-show="albumcontent">
+     <div  ng-if="!grpdetailspage.data.albums" class="alert alert-danger">
+  No data found
+</div>    
+    <br> 
+   <div ng-if="grpdetailspage.data.albums">
+<div class="panel-body" data-ng-repeat="k in [0,1,2,3,4]">    
+      <div class="well" ng-show="exists({{grpdetailspage.data.albums.data[k].name}})">
+        <a href="#{{grpdetailspage.data.id+k}}" data-toggle="collapse" ng-click="photodetails()">  
+         {{grpdetailspage.data.albums.data[k].name}}</a></div>
+    <div id="{{grpdetailspage.data.id+k}}" class="collapse panel-collapse">
+<div class="panel panel-default" data-ng-repeat="j in [0,1]" ng-show="exists({{grpdetailspage.data.albums.data[k].photos.data[j].images[5].source}})">
+    
+<img class="img-responsive"  src="{{grpdetailspage.data.albums.data[k].photos.data[j].images[5].source}}" class="media-object" style="height:300px;width:600px">
+
+    </div>
+        </div>    
+    </div>
+    </div>
+   </div>     
+</div>
+</div>
+</div>
+
+
+    
+    <div class="col-md-6"> 
+<div class="panel-group">
+<div class="panel panel-default" >
+ 
+<div class="panel-heading">
+Posts
+</div>
+      <br>
+    <div  ng-if="!grpdetailspage.data.posts" class="alert alert-danger">
+  No data found
+</div>
+    <div id="progbar" class="text-center" ng-show="postshowbar" >
+          <br><br><br><br><br>
+                <div class="progress center-block" style="width:300px;">
+                    <div class="progress-bar progress-bar-striped active" role="progressbar" aria-valuenow="50" aria-valuemin="0" aria-valuemax="100" style="width: 50%">
+                        <span class="sr-only">50% Complete</span>
+                    </div>
+                </div>
+            </div>
+     <div ng-show="postcontent">
+ 
+    <div ng-if="grpdetailspage.data.posts">
+         <div class="panel panel-default" data-ng-repeat="i in [0,1,2,3,4]" ng-show="exists({{grpdetailspage.data.posts.data[i].message}})">
+    <div class="panel-body" >
+<div class="media">
+    <div class="media-left">
+    <img src="{{grpdetailspage.data.picture.data.url}}" class="media-object" style="width:60px">
+    </div>
+<div class="media-body">
+      <h4 class="media-heading">{{grpdetailspage.data.name}}</h4>
+<p>{{dateformat(grpdetailspage.data.posts.data[i].created_time)}}</p>
+    </div>
+  </div>
+        <br>
+<div>
+{{grpdetailspage.data.posts.data[i].message}}
+</div> 
+             </div></div> </div>  
+
+    </div>
+    </div>                           
+
+    </div>
+</div>   
+             </div></div></div>
+     
+       <!--favorite--> 
+    <div id="favorite" class="tab-pane fade">
+        <div id="favshow" ng-show="favPage" class="slideacross">
+  
+        <table class = "table table-hover">
+    <thead><tr><th>#</th><th>Profile Photo</th><th>Name</th><th>Type</th><th>Favorite</th><th>Details</th></tr></thead>
+       <tr ng-repeat="favo in arr">
+           <td>{{$index+1}}</td>
+           <td><img src="{{favo.pictureurl}}" class="img-circle" height="50px" width="50px"></td>
+          <td>{{favo.name}}</td>
+           <td>  {{favo.type}} </td>
+    <td><button type="button" class="btn btn-default btn-sm" ng-click="deletefav(favo.id)">
+          <span class="glyphicon glyphicon-trash"></span>
+        </button></td>
+           <td><button type="button" class="btn btn-default btn-sm" ng-click="displayfavDetails(favo.id); favdetailspage(favo.id)">
+          <span class="glyphicon glyphicon-menu-right"></span> 
+        </button></td></tr>                  
+         </table>
+      </div> 
+    
+         <div id="details" ng-show="favDetails" class="slideacross">
+         <div class="col-md-12 page">                      
+
+    <div class="col-md-12 row">
+ <div class="col-md-8">
+    <button type="button" class="btn btn-default btn-md" ng-click="displayfavFirstPage()">
+         <span class="glyphicon glyphicon-chevron-left"> </span>  Back 
+        </button>    
+    </div>      
+     <div class="col-md-3">
+        
+        </div>
+        <div class="col-md-1">
+         <span class = "glyphicon glyphicon-star-empty" role="button" id="star" onclick="" ng-click=""></span>
+            <button class="btn btn-default pull-right" id="idvalue"  ng-click="share(fvdetailspage.data.id)" align="right"><img src='http://cs-server.usc.edu:45678/hw/hw8/images/facebook.png' height="25px" width="25px"></button>
+        </div>
+   </div>
+<div class="col-md-6"> 
+<div class="panel-group">
+<div class="panel panel-default" >
+
+<div class="panel-heading">
+Albums
+</div>
+    
+    <br>
+     <div  ng-if="!fvdetailspage.data.albums" class="alert alert-danger">
+  No data found
+</div>    
+    <br> 
+   <div ng-if="fvdetailspage.data.albums">
+<div class="panel-body" data-ng-repeat="k in [0,1,2,3,4]">    
+      <div class="well" ng-show="exists({{fvdetailspage.data.albums.data[k].name}})">
+        <a href="#{{fvdetailspage.data.id+k}}" data-toggle="collapse" ng-click="photodetails()">  
+         {{fvdetailspage.data.albums.data[k].name}}</a></div>
+    <div id="{{fvdetailspage.data.id+k}}" class="collapse panel-collapse">
+<div class="panel panel-default" data-ng-repeat="j in [0,1]" ng-show="exists({{fvdetailspage.data.albums.data[k].photos.data[j].images[5].source}})">
+    <div class="panel-body"> 
+<img src="{{fvdetailspage.data.albums.data[k].photos.data[j].images[5].source}}" class="media-object" style="height:300px;width:600px">
+</div>
+    </div>
+        </div>    
+    </div>
+   </div>     
+</div>
+</div>
+</div>
+
+    
+    <div class="col-md-6"> 
+<div class="panel-group">
+<div class="panel panel-default" >
+ 
+<div class="panel-heading">
+Posts
+</div>
+      <br>
+    <div  ng-if="!fvdetailspage.data.posts" class="alert alert-danger">
+  No data found
+</div>
+    <br>
+ 
+    <div ng-if="fvdetailspage.data.posts">
+         <div class="panel panel-default" data-ng-repeat="i in [0,1,2,3,4]" ng-show="exists({{fvdetailspage.data.posts.data[i].message}})">
+    <div class="panel-body" >
+<div class="media">
+    <div class="media-left">
+    <img src="{{fvdetailspage.data.picture.data.url}}" class="media-object" style="width:60px">
+    </div>
+<div class="media-body">
+      <h4 class="media-heading">{{fvdetailspage.data.name}}</h4>
+<p>{{dateformat(fvdetailspage.data.posts.data[i].created_time)}}</p>
+    </div>
+  </div>
+        <br>
+<div>
+{{fvdetailspage.data.posts.data[i].message}}
+</div> 
+             </div></div>   
+
+    </div>
+    </div>                           
+
+    </div>
+</div>   
+</div>          
+         
+ </div>                    
+    </div>
+    </div>         
+    
+  </div>         
+       
+          
+         </div></div>  
+ 
+        <script>
+            function changeColor(id)
+            {
+                alert("in star");
+                document.getElementById(id).setAttribute("class","glyphicon glyphicon-star");
+                document.getElementById(id).style.color="yellow";
+            }
+        
+        </script>
+        
+        <script src="fbjs.js"></script>
+     </body>
+     </html>
+    
