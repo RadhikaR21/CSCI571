@@ -1,0 +1,227 @@
+<html>
+	<head>
+    <style>
+    div.relative
+    {
+    position: relative;
+    top: 200px;
+    }
+     input[type=text]
+        {
+                -webkit-transition: all 0.4s ease-in-out;
+                -moz-transition: all 0.4s ease-in-out;
+                -ms-transition: all 0.4s ease-in-out;
+                -o-transition: all 0.4s ease-in-out;
+                outline: none;
+                padding: 1px 0px 1px 1px;
+                margin: 2px 1px 2px 0px;
+                border: 2px solid #DDDDDD;
+            }
+        
+    input[type=text]:focus
+        {
+                box-shadow: 0 0 2px rgba(81, 200, 240, 1);
+                padding: 1px 0px 1px 1px;
+                margin: 2px 1px 32x 0px;
+                border: 1px solid rgba(81, 200, 240, 1);
+            }
+        
+    </style>
+	</head>
+    <body> 
+        <form name="airlineform" method="post">
+    <div class="relative" style = "padding : 0px 0px 0px 0px">
+    <center>
+    <h4>Enter URL for Airlines List XML File </h4>
+    <input  id = "inputvalue"  type = "text" method="POST" maxlength="255" size="30" onUnfocus="send()" />
+    <br><br>
+    <input type="submit" name="submit" tabindex="-1" onClick="loadXML(this.form)" value="Submit Query"/>
+    </center>
+    </div>    
+        
+    <script type="text/javascript">
+        
+    var flag = "true";
+    function loadXML()
+    {     
+        var url = document.getElementById("inputvalue").value; //will fetch the url :airlinelinelist.xml
+        if (url == "")
+        {
+		alert("Please enter a filename");
+		flag = "false";
+		return;
+		}
+   
+        var xmlhttp;
+        if(window.XMLHttpRequest)	
+		{//for new browser versions
+		xmlhttp = new XMLHttpRequest();
+		}
+		else
+        {//for older browser versions
+		xmlhttp = new ActiveXObject("Microsoft.XMLHTTP");
+		}
+		try
+            {
+        xmlhttp.onreadystatechange = function()
+            {
+			if (this.readyState==4 && this.status==200)
+			{
+			myFunction(this);
+			}
+			else if(this.readyState==4 && this.status==404)
+			{
+			alert("XML file not found");
+			flag = "false";
+			}
+			};
+	xmlhttp.open("GET",url,true);
+//     if(!openvalue){
+//            alert("XML file not found");
+//			flag = "false";
+//        }
+	   
+	   xmlhttp.send();
+	   }
+	   catch(err)
+	   {
+	   alert("XML file not found");
+	   flag = "false";
+	   }
+}
+function myFunction(xml)
+	{
+	var i;
+	var xmlDoc = xml.responseXML;
+        
+	if(xmlDoc == null)
+    {
+	alert("Error in XML file");
+	flag = "false";
+	}
+	if(xmlDoc.documentElement.nodeName == "parsererror")
+    { console.log(xmlDoc.documentElement.nodeName);
+		alert("Error in XML file");
+		flag = "false";
+    }
+    
+   try
+    {
+        ELEMENT_NODE=1;
+        root=xmlDoc.DocumentElement;
+        html_text="<html><head></head><body>";
+        html_text+="<table border='2'>";        
+        
+        header=xmlDoc.getElementsByTagName("Header");
+        data=header.item(0).children;
+        
+    
+        console.log(data);
+         plane=xmlDoc.getElementsByTagName("Row");
+         planeNodeList=plane.item(0).children;
+        
+        
+        console.log(planeNodeList[1]);
+        console.log(plane);
+        
+        
+        html_text+="<tbody>";
+        html_text+="<tr>";
+ 
+        x=0;y=0;
+        //output the headers
+ 
+        for(i=0;i<planeNodeList.length;i++)
+        {
+            if(planeNodeList.item(i).nodeType==ELEMENT_NODE)
+            { headerrow=planeNodeList.item(i).nodeName;
+             headerdata=data.item(i).textContent;      
+              console.log(headerrow);
+              console.log(headerdata);
+                if(headerrow=="Airline")
+                {x=300;y=200;}
+                if(headerrow=="IATA")
+                headerrow="IATA";
+                if(headerrow=="Hubs")
+                headerrow="Hubs";
+                if(headerrow=="Notes")
+                headerrow="Notes";
+                if(headerrow=="HomePage")
+                headerrow="HomePage";
+                if(headerrow=="Plane")
+                headerrow="Plane";
+                html_text+="<th>"+headerdata+"</th>";            
+            }
+        }
+        html_text+="</tr>"; 
+        
+        console.log(xmlDoc.getElementsByTagName("Row"));
+        console.log(planeNodeList.nodeName);
+        //output the values
+        
+        for(m=0;m<plane.length;m++) // for all the airlines
+        {               
+            planeNodeList=plane.item(m).children; //get properties of an airline
+            html_text+="<tr>";      //start a new row of the output table
+            for(j=0;j<planeNodeList.length;j++)
+               {  
+                 if(planeNodeList.item(j).nodeType==ELEMENT_NODE)
+                   {  
+                       if(planeNodeList.item(j).nodeName=="Hubs")
+                           {
+                               html_text+="<td line height=50%>";                             
+                       hubscount=xmlDoc.getElementsByTagName("Hubs"); 
+                       hubcount=hubscount.item(m).children;                 
+                                                              
+                                for(k=0;k<1;k++)
+                                  {  console.log(k);                                     
+                                      html_text+="<b><ul><li style = \"line-height:100%\">"+hubcount.item(k).textContent+"</li></ul></b>";
+                                     
+                                  }                          
+                                for(k=1;k<hubcount.length;k++)
+                                  {  console.log(k);                                     
+                                      html_text+="<ul><li style = \"line-height:100%\">"+hubcount.item(k).textContent+"</li></ul>";
+                                     
+                                  }
+                               html_text+="</td>";
+                            }
+                    else if(planeNodeList.item(j).nodeName=="HomePage")
+                           {
+                     html_text+="<td><a href='"+planeNodeList.item(j).textContent+"' target=\"_self\">"+planeNodeList.item(j).textContent+"</a></td>";            
+                           }
+                     else if(planeNodeList.item(j).nodeName=="Plane")
+                         {
+                      //handle images separately
+	             html_text+="<td><img src='"+planeNodeList.item(j).textContent+"' width='"+x+"' height='"+y+"'></td>";  
+                       }                 
+                      else
+                       {
+                           html_text+="<td>"+planeNodeList.item(j).textContent+"</td>";
+                       }
+                   }
+               }
+               html_text+="</tr>"; //close the table row 
+        }      
+  
+        html_text+="</tbody>";  
+        html_text+="</table>";
+        html_text+="</body></html>";  
+     }
+     catch(e)
+	{
+	alert("The input XML File has no airline company entries");
+	flag = "false";
+	}
+	
+	if ( flag == "true")
+	{
+	var mydoc = window.open("", "target=_blank", "height=1000,width=1300,scrollbars = yes");
+	mydoc.document.write(html_text);
+	}	
+	}	
+	</script>
+         <noscript/>
+     </form>   
+	</body>
+   
+	</html>
